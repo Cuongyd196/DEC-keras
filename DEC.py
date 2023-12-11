@@ -13,7 +13,7 @@ Author:
 from time import time
 import numpy as np
 import keras.backend as K
-from keras.engine.topology import Layer, InputSpec
+from keras.layers import Layer, InputSpec
 from keras.layers import Dense, Input
 from keras.models import Model
 from keras.optimizers import SGD
@@ -158,7 +158,7 @@ class DEC(object):
                                           self.model.get_layer(
                                               'encoder_%d' % (int(len(self.model.layers) / 2) - 1)).output)
                     features = feature_model.predict(self.x)
-                    km = KMeans(n_clusters=len(np.unique(self.y)), n_init=20, n_jobs=4)
+                    km = KMeans(n_clusters=len(np.unique(self.y)), n_init=20)
                     y_pred = km.fit_predict(features)
                     # print()
                     print(' '*8 + '|==>  acc: %.4f,  nmi: %.4f  <==|'
